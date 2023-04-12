@@ -1,0 +1,136 @@
+<div class="container" >
+
+ <div class="tab">  
+    <button class="tablinks" onclick="openSection(event, 'produit')" id="defaultOpen">Produit</button>
+    <button class="tablinks disabled" onclick="openSection(event, 'photo')" >Photo</button>
+    <button class="tablinks" onclick="openSection(event, 'stock')" >Stock</button>
+</div> 
+
+
+
+
+
+  <div id="produit" class="tabcontent">
+        
+
+          <div class="row" style="margin-top: 2px;"
+                  <div class="col-md-1 rounded btn btn-dark"><a href="{% url "myAdmin" %}"><span class="fas fa-arrow-left" style="color:rgb(40, 16, 177)"></span></a></div>      
+                {% if id %}
+                <div class="btn btn-success"><a href="{{id}} ">création d'image - Last_id--{{id}}</a></div>
+                {% endif %} 
+            <form method="POST" action="{% url 'insertion_du_produit' %}" class="row g-3 needs-validation"  novalidate>{% csrf_token %}
+              <input type="hidden" name="user_id" value="{{user.id}}">
+              <div class="col-md-4 position-relative">
+                <label>Titre:</label>
+                  {{form.titre}}
+                  <div class="invalid-tooltip">Le titre est un champ obligatoire?</div>
+                </div>
+              
+                <div></div>
+
+              <div class="col-md-4">
+                <label>Type:</label> {{form.type}}
+                <div class="invalid-tooltip">???</div>
+              </div>
+
+              <div class="col-md-4">
+                <label id="lbl">Race:</label>{{form.race}}
+                <div class="invalid-tooltip">???</div>
+              </div>
+
+              <div></div>
+
+              <div class="col-md-1 position-relative">
+                  <label>Ages :</label>{{form.ages}}      
+                  <div class="invalid-tooltip">???</div>
+              </div>
+            <div></div>
+              <div class="col-md-6">
+                <label>Descriptions :</label>
+                  {{form.description}}
+              </div>
+
+              <div></div>
+                <div class="col-md-2">
+                    <label>Poids (/kg):</label>{{form.poids}}
+                </div>
+                
+
+                <div class="col-md-2">      
+                    <label>Options</label>{{form.options}}      
+                    <div class="invalid-tooltip">Demande ou Offre?</div>
+                </div>
+                
+
+                <div class="col-md-2 position-relative">
+                    <label id="r_lbl">Regions:<i class="fas fa-exclamation-circle trailing"></i></label>{{form.regions}} 
+                </div>
+
+                <div class="col-md-3 position-relative">
+                  <label id="r_lbl">District:<i class="fas fa-exclamation-circle trailing"></i></label>{{form.district}} 
+                </div>
+                <div class="col-md-3 position-relative">
+                  <label id="r_lbl">Communes:<i class="fas fa-exclamation-circle trailing"></i></label>{{form.communes}} 
+                </div>
+
+
+                <div class="col-md-4 position-relative">
+                  <label id="r_lbl">Adresse Complet:<i class="fas fa-exclamation-circle trailing"></i></label>{{form.adresseComplet}} 
+                </div>
+
+                <div class="col-12 pt-2">
+                  <button class="btn btn-primary" type="submit">valider</button>
+                </div>
+              </form>
+
+            </div>
+            
+
+
+
+
+<div id="photo" class="tabcontent">
+  <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Praesentium quaerat atque tempore, nam saepe sequi mollitia dignissimos odit. Suscipit ut animi dolorum, numquam deserunt consequuntur corrupti rem praesentium esse quas?</p>
+</div>
+
+
+<div id="stock" class="tabcontent"> 
+  <div class="center">
+    <div class="input-group">
+        <form action="{% url "stockArticle" %}" method="POST">{% csrf_token %}
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-danger btn-number" data-type="minus" data-field="quant[2]">
+              <span class="glyphicon glyphicon-minus"></span>
+            </button>
+          </span>
+            {{ formStockArticle.nombre }}
+          <button>+</button><p></p>
+        
+          <button type="submit">envoyer</button>
+        </form>
+  </div>
+  </div> 
+  
+
+  
+  
+  
+  <!------ Include the above in your HEAD tag ---------->
+  
+    <div class="center">
+
+      <div class="input-group">
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-danger btn-number"  data-type="minus" data-field="quant[2]">
+                  <span class="glyphicon glyphicon-minus"></span>
+                </button>
+            </span>
+            <input type="text" name="quant[2]" class="form-control input-number" value="10" min="1" max="100">
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="quant[2]">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+            </span>
+        </div>
+    <p></p>
+  </div>

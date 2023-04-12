@@ -1,0 +1,122 @@
+{% extends 'myBase.html' %}
+<div class="container">
+
+{% block banniere %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url "home" %}">Accueil</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="{% url "insertion_du_produit" %}">insertion de produit</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            <a href="#">Data</a>
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </nav>
+{% endblock %}
+
+{% block content %}
+<table class="table table-hover">
+    <th>
+        <tr>    <td>Id</td>
+                <td>Nom de l'Utilisateur</td>
+                <td>Adresse Electronique</td>
+                <td>Prénom</td>
+                <td>Nom</td>
+                <td>Super Admin</td>
+                <td>Date de début</td>
+                <td>Derniere connection</td>
+        </tr>
+    </th>
+        
+    <tbody>
+      {% if user.is_superuser == True %}
+
+      {% for users in myAdminListe  %}       
+        
+        <tr><td>{{users.id}}</td>
+            <td>{{users}}</td>
+            <td>{{users.email}}</td>
+            <td>{{users.last_name}}</td>
+            <td>{{users.first_name}}</td>           
+            
+            <td>
+              {% if users.is_staff == 1 %}
+              <input type="checkbox" name="" id="" checked disabled>
+              {% else %}
+              <input type="checkbox" name="" id=""disabled>
+              {% endif %}  
+            </td>
+            <td>{{users.date_joined}}</td>
+
+            <td>{{users.last_login}}</td>
+        </tr>       
+
+        {% endfor %}
+
+        {% else %}
+
+        <script>
+        
+          window.onload = function(){
+            location.href="https://www.javascripttutorial.net/"
+          }
+        </script>
+
+
+        {% endif %}
+    </tbody>
+  
+
+</table>
+
+{% endblock %}
+{% block  footer %}
+<div class="row">
+    <div class="col-md-4">
+      <nav aria-label="">
+        {% if myAdminListe.has_other_pages  %}
+        <ul class="pagination pagination-circle">
+          {% if users.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{myAdminListe.previous_page_number}}"><span>Précedent</span></a>
+          </li>
+          {% else %}
+          <li class="page-item disabled">
+            <a class="page-link" href="">Précedent</a>
+          </li>
+        {% endif %}
+          {% for i in myAdminListe.paginator.page_range %}
+          {% if class.number == i %}
+          <li class="page-item"><a class="page-link active" href="#">{{ i }} <span class="visually-hidden">(current)</span></a></li>
+          {% else %}
+          <li class="page-item"><a class="page-link " href="?page={{i}}">{{i}}</a></li>
+          {% endif %}
+          {% endfor %}
+      
+          {% if users.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ myAdminListe.next_page_number }}">Suivant</a>
+          </li>
+          {% else %}
+          <li class="page-item disabled ">
+            <a class="page-link" href="">Suivant</a>
+          </li>
+          {% endif %}
+        </ul>
+        {% endif %}
+            
+        </div>
+      
+      </nav>
+  
+      <hr>
+    </div>
+{%  endblock %}
+

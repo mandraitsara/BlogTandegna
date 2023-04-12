@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+
+
+
+  {% if details_tandegna %}
+  {% for image in image %}
+    {% if details_tandegna.id == image.article_id %}
+    <div class="container">
+      <!-- Full-width images with number text -->
+      {% if details_tandegna.options  == "Demande" %}
+      <div style="background-color:rgb(120, 42, 165)"><h1 style="color:cyan ">{{details_tandegna.options}}</h1></div>
+      {% else %}
+      <div style="background-color: rgb(46, 1, 1);"><h1 style="color:rgb(250, 7, 7)">{{details_tandegna.options}}</h1></div>
+      {% endif %}
+
+      <h1 class="text-center">{{details_tandegna.titre|upper}}</h1>
+      <div class="grid-container">
+
+        <div class="item5">
+            <div class="mySlides">
+              <div class="numbertext">1 / 4</div>
+                <img id ="image" src="{% static 'media/'%}{{image.image1}}">
+            </div>
+          
+            <div class="mySlides">
+              <div class="numbertext">2 / 4</div>
+                <img id ="image"  src="{% static 'media/'%}{{image.image2}}" >
+            </div>
+          
+            <div class="mySlides">
+              <div class="numbertext">3 / 4</div>
+                <img id ="image"  src="{% static 'media/'%}{{image.image3}}">
+            </div>
+          
+            <div class="mySlides">
+              <div class="numbertext">4 / 4</div>
+                <img id ="image"  src="{% static 'media/'%}{{image.image4}}">
+            </div>
+          
+            <!-- Next and previous buttons -->
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+          
+            <!-- Image text -->
+            <div class="caption-container">
+              <p id="caption"></p>
+            </div>
+          
+
+          </div>
+            <!-- Thumbnail images -->
+          
+            <div class="item1">
+                <img class="demo" src="{% static 'media/'%}{{image.image1}}" style="width:50%" onclick="currentSlide(1)" alt="{{image.image1}}">
+              </div>
+              <div class="item2">
+                <img class="demo" src="{% static 'media/'%}{{image.image2}}" style="width:50%" onclick="currentSlide(2)" alt="{{image.image2}}">
+              </div>
+              <div class="item3">
+                <img class="demo" src="{% static 'media/'%}{{image.image3}}" style="width:50%" onclick="currentSlide(3)" alt="{{image.image3}}">
+              </div>
+              <div class="item4">
+                <img class="demo" src="{% static 'media/'%}{{image.image4}}" style="width:50%" onclick="currentSlide(4)" alt="{{image.image4}}">
+              
+              </div>
+            
+
+
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="accordion accordion-borderless" id="accordionFlushExampleX">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingOneX">
+                  <button class="accordion-button" type="button" data-mdb-toggle="collapse"
+                    data-mdb-target="#flush-collapseOneX" aria-expanded="true" aria-controls="flush-collapseOneX">
+                    <h1>Description - {{details_tandegna.titre|upper}}</h1>
+                  </button>
+                </h2>
+                <div id="flush-collapseOneX" class="accordion-collapse collapse show"
+                  aria-labelledby="flush-headingOneX" data-mdb-parent="#accordionFlushExampleX">
+                  <div class="accordion-body">
+
+                   {{details_tandegna.description|title}}
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingTwoX">
+                  <button class="accordion-button collapsed" type="button" data-mdb-toggle="collapse"
+                    data-mdb-target="#flush-collapseTwoX" aria-expanded="false" aria-controls="flush-collapseTwoX">
+                    <h2>Caractéristiques</h2>
+                  </button>
+                </h2>
+                <div id="flush-collapseTwoX" class="accordion-collapse collapse" aria-labelledby="flush-headingTwoX"
+                  data-mdb-parent="#accordionFlushExampleX">
+                  <div class="accordion-body">
+                    <table class="table table-striped">
+                      <tr><td> <h5 for="race">Race : </h5></td><td><h5> {{details_tandegna.race|title}}</h5></td></tr>
+                      <tr><td> <h5 for="race">Poids : </h5></td><td><h5> {{details_tandegna.poids|title}}</h5></td></tr>
+                      <tr><td> <h5 for="race">Type : </h5></td><td><h5> {{details_tandegna.type|title}}</h5></td></tr>
+                      <tr><td> <h5 for="race">Ages : </h5></td><td><h5> {{details_tandegna.ages|title}}</h5></td></tr>
+                    </table>
+                   
+                   
+                    
+                    
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingThreeX">
+                  <button class="accordion-button collapsed" type="button" data-mdb-toggle="collapse"
+                    data-mdb-target="#flush-collapseThreeX" aria-expanded="false" aria-controls="flush-collapseThreeX">
+                    <h2>Contacts : </h2> 
+                  </button>
+                </h2>
+                <div id="flush-collapseThreeX" class="accordion-collapse collapse" aria-labelledby="flush-headingThreeX"
+                  data-mdb-parent="#accordionFlushExampleX">
+                  <div class="accordion-body">
+                    <table class="table table-striped">
+                      <tr><td><h5>Regions</h5></td><td><h5>{{details_tandegna.regions|title}}</h5></td></tr>
+                      <tr><td><h5>District</h5></td><td><h5>{{details_tandegna.district|title}}</h5></td></tr>
+                      <tr><td><h5>Communes</h5></td><td><h5>{{details_tandegna.communes|title}}</h5></td></tr>                      
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="row">
+            <h1>Suggestions :</h1>
+
+
+
+        </div>
+
+        <div class="row">
+      
+          <h1>Nouveaux produits :</h1>
+
+        </div>
+        
+      {% endif %}
+      {% endfor %}
+      
+      {% endif %}
+
+
+
+     <!-- Container for the image gallery -->
+
+  
+  {% endblock  %}
+
+
+  

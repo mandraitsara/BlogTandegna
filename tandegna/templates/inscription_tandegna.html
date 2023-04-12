@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block title %} Inscription {% endblock %}
+{% block banniere %} {% endblock %}
+
+{% block content %}
+<div class="container">
+
+    
+
+{% for message in messages %}
+<div class="alert alert-danger alert-dismissible fade show">    
+    <strong> {{ message.tags }}</strong> {{ message }}
+    <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+</div>
+{% endfor %}
+    
+<div class="card">
+  <div class="card-header carte-title text-center text-uppercase "><h1> Inscription</h1></div>
+  <div class="card-body">
+   
+                
+    <form class="row g-3 needs-validation" method="POST" action="{% url 'inscription_tandegna' %}" novalidate> {% csrf_token %}        
+        <div class="col-md-4">
+            <label for="">Nom:</label>{{form.first_name|lower}}
+        </div>
+
+        <div class="col-md-4">
+            
+                <label for="">Prenom</label>{{form.last_name}}
+        </div>
+        
+
+            <div class="col-md-4">
+                <label for="">Email:</label>{{form.email}}
+            </div>
+
+            <div class="col-md-4">                
+                 <label for="">Pseudo</label>   {{form.username}}
+            </div>      
+
+            <div class="col-md-4">                
+                <label for="">Mot de passe</label>{{form.password}}    
+            </div>
+
+            <div class="col-md-4">                
+                <label for="">Confirmation Mot de passe</label>{{form.passwordC}}    
+            </div>
+
+                
+
+            <div class="col-md-4">                
+                <label for="">Telephone</label>    {{form.telephone}}
+            </div>
+
+
+        
+        
+        <div class="col-12">        
+            {{form.check}}
+            <label class="form-check-label"  for="invalidCheck">cocher et accepter les conditions...</label>
+        </div>
+        
+        
+        <div class="col-12">
+        <button class="btn btn-primary" id="btt" type="submit">Inscription</button>
+        </div>
+    </form>
+  </div>
+</div>    
+</div>
+{% endblock %}

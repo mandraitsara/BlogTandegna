@@ -1,0 +1,246 @@
+
+{% extends 'myBase.html' %}
+
+{% load static %}
+
+{% block css %}
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link rel="stylesheet" href="{% static 'css/mdb.min.css' %}" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.2.0/css/all.min.css">
+<link rel="stylesheet" href="{% static 'css/tandegnaTabs.css' %}" />
+{% endblock %}
+
+
+{% block script %}
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <script type="text/javascript" src="{% static 'js/tandegnaTabs.js' %}"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"> </script>
+
+  <script>
+    $('.btn-number').click(function(e){
+    e.preventDefault();
+    
+    fieldName = $(this).attr('data-field');
+    type      = $(this).attr('data-type');
+    var input = $("input[name='"+fieldName+"']");
+    var currentVal = parseInt(input.val());
+    if (!isNaN(currentVal)) {
+        if(type == 'minus') {
+            
+            if(currentVal > input.attr('min')) {
+                input.val(currentVal - 1).change();
+            } 
+            if(parseInt(input.val()) == input.attr('min')) {
+                $(this).attr('disabled', true);
+            }
+
+        } else if(type == 'plus') {
+
+            if(currentVal < input.attr('max')) {
+                input.val(currentVal + 1).change();
+            }
+            if(parseInt(input.val()) == input.attr('max')) {
+                $(this).attr('disabled', true);
+            }
+
+        }
+    } else {
+        input.val(0);
+    }
+});
+
+
+ $('.input-number').focusin(function(){
+   $(this).data('oldValue', $(this).val());
+});
+
+
+
+
+$('.input-number').change(function() {
+    
+    minValue =  parseInt($(this).attr('min'));
+    maxValue =  parseInt($(this).attr('max'));
+    valueCurrent = parseInt($(this).val());
+    
+    name = $(this).attr('name');
+    if(valueCurrent >= minValue) {
+        $(".btn-number[data-type='minus'][data-field='"+name+"']").removeAttr('disabled')
+    } else {
+        alert('Sorry, the minimum value was reached');
+        $(this).val($(this).data('oldValue'));
+    }
+    if(valueCurrent <= maxValue) {
+        $(".btn-number[data-type='plus'][data-field='"+name+"']").removeAttr('disabled')
+    } else {
+        alert('Sorry, the maximum value was reached');
+        $(this).val($(this).data('oldValue'));
+    }
+    
+    
+});
+
+
+  </script>
+
+
+  {% endblock %}
+
+
+{% block content %}
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+ 
+    <div class="container"
+         style="color:rgb(63, 9, 70)">
+        
+ 
+        <ul class="nav nav-tabs">
+            <li class="active" id="lienA">
+              <a data-toggle="tab" href="#produit">Produit</a>
+          </li>
+            <li class="disabled" id="lienB"><a data-toggle="tab"  href="#photo">Photo</a></li>
+            {% if id %}
+            <li class="disabled" id="lienC"><a href="#stock" data-toggle="tab" >Stock</a></li>
+            {% else %}
+            <li class="disabled" id="lienC"><a href="#stock" >Stock</a></li>
+            {% endif %}
+
+            <li class="disabled" id="lienD"><a href="#client">Client</a></li>
+        </ul>
+ 
+        <div class="tab-content">
+            <div id="produit"class="tab-pane fade in active">
+              <h3 class="center">Produit:</h3>
+              <form method="POST" action="{% url 'insertion_du_produit' %}" class="row g-3 needs-validation"  novalidate>{% csrf_token %}
+              <input type="hidden" name="user_id" value="{{user.id}}">
+              <div class="col-md-4 position-relative">
+                <label>Titre:</label>
+                  {{form.titre}}
+                  <div class="invalid-tooltip">Le titre est un champ obligatoire?</div>
+                </div>
+              
+                <div></div>
+
+              <div class="col-md-4">
+                <label>Type:</label> {{form.type}}
+                <div class="invalid-tooltip">???</div>
+              </div>
+
+              <div class="col-md-4">
+                <label id="lbl">Race:</label>{{form.race}}
+                <div class="invalid-tooltip">???</div>
+              </div>
+
+              <div></div>
+
+              <div class="col-md-1 position-relative">
+                  <label>Ages :</label>{{form.ages}}      
+                  <div class="invalid-tooltip">???</div>
+              </div>
+            <div></div>
+              <div class="col-md-6">
+                <label>Descriptions :</label>
+                  {{form.description}}
+              </div>
+
+              <div></div>
+                <div class="col-md-2">
+                    <label>Poids (/kg):</label>{{form.poids}}
+                </div>
+                
+
+                <div class="col-md-2">      
+                    <label>Options</label>{{form.options}}      
+                    <div class="invalid-tooltip">Demande ou Offre?</div>
+                </div>
+                
+
+                <div class="col-md-2 position-relative">
+                    <label id="r_lbl">Regions:<i class="fas fa-exclamation-circle trailing"></i></label>{{form.regions}} 
+                </div>
+
+                <div class="col-md-3 position-relative">
+                  <label id="r_lbl">District:<i class="fas fa-exclamation-circle trailing"></i></label>{{form.district}} 
+                </div>
+                <div class="col-md-3 position-relative">
+                  <label id="r_lbl">Communes:<i class="fas fa-exclamation-circle trailing"></i></label>{{form.communes}} 
+                </div>
+
+
+                <div class="col-md-4 position-relative">
+                  <label id="r_lbl">Adresse Complet:<i class="fas fa-exclamation-circle trailing"></i></label>{{form.adresseComplet}} 
+                </div>
+
+                <div class="col-12 pt-2">
+                  <button class="btn btn-primary" type="submit">valider</button>
+                </div>
+              </form>
+ 
+            </div>
+
+
+            <div id="photo" class="tab-pane fade">
+                <h3>Photo</h3>
+                 
+<p>Here you can find all sorts of Data
+                  Structures explained and problems wherein
+                  we need to use those!</p>
+ 
+            </div>
+            <div id="stock" class="tab-pane fade">
+                <h3>Stock</h3>
+                {% for message in messages %}
+                  <div class="alert alert-danger alert-dismissible fade show">    
+                      <strong> {{ message.tags }}</strong> {{ message }}
+                      <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                  </div>
+                {% endfor %}
+                <div class="center">
+                  <form action="{% url "stockArticle" %}" method="post">{% csrf_token %}
+                          <div class="input-group">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-danger btn-number"  data-type="minus" data-field="nombre">
+                                      <span class="glyphicon glyphicon-minus"></span>
+                                    </button>
+                                </span>
+                                <input type="text" value="{{id}}" name="id_article">
+                                <input type="text" name="nombre" class="form-control input-number" value="1" min="1" max="1000">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="nombre">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </button>
+                                </span>
+                            </div> 
+                            <span><hr></span>
+                            <input type="submit" class="form-control  btn-primary" value="valider">
+                  </form>
+ 
+            </div>
+            <div id="menu3" class="tab-pane fade">
+                <h3>Interview</h3>
+                 
+<p>Here, you can find 'Interview Experiences'
+                  for all the companies!
+              </p>
+ 
+            </div>
+        </div>
+    </div>
+  
+  
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}
+
+
+

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block banniere %}
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">        
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url "home" %}">accueil</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a href="{%  url "inscription_tandegna" %}">inscription </a></li>         
+            </ol>
+        </nav>
+    </nav>
+</div>
+{% endblock %}
+
+{% block recherche %}
+
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h5 class="modal-title">Identification</h5>
+
+        
+          {% for message in messages %}
+          <div class="alert alert-{{ message.tags }} alert-dismissible " role="alert">
+            <strong>Message : </strong> {{ message }}
+            <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          {% endfor %}
+
+        
+        
+          <form action="{% url 'login_tandegna' %}" class="text-center" method="POST" novalidate> {% csrf_token %}            
+            <div class="col-md-12">
+              <div class="form-outline">
+                {{form.username}}
+                <label for="validationDefault01" class="form-label">Pseudo</label>
+              </div>
+            </div>
+            <br>            
+            <div class="col-md-12">
+              <div class="form-outline">
+                {{form.password}}
+                <label for="validationDefault02" class="form-label">mot de passe</label>
+              </div>        
+          
+          <br>
+          <button type="submit" class="btn btn-primary" data-mdb-dismiss="modal" >valider</button>
+        </form>
+    </div>
+
+    {% endblock %}
+

@@ -1,0 +1,12 @@
+#img{
+    height: 200px;
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+}
+
+#photo_id{
+    height: auto;
+    width: 100%;
+}
