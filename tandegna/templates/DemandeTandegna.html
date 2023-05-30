@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="row">
+    {% for demande in DemandeTandegna %}
+    <div class="col-md-4">
+      
+      <div class="card">
+        <a href="{% url 'home'%}{{demande.id}}"><h1 style="color:green">{{demande.options}}</h1></a>
+        <hr>
+  
+        <div id="photo_id">
+          {% for images in image %}
+          <div id="carouselExampleCaptions" class="carousel slide" data-mdb-ride="carousel">
+            <div class="carousel-indicators">
+              <button type="button" data-mdb-target="#carouselExampleCaptions" data-mdb-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-mdb-target="#carouselExampleCaptions" data-mdb-slide-to="1" aria-label="Slide 2"></button>
+              <button type="button" data-mdb-target="#carouselExampleCaptions" data-mdb-slide-to="2" aria-label="Slide 3"></button>
+              <button type="button" data-mdb-target="#carouselExampleCaptions" data-mdb-slide-to="3" aria-label="Slide 4"></button>
+            </div>
+  
+                  {% if  images.article_id == demande.id %}
+  
+                        <div class="carousel-inner">
+  
+                          <div class="carousel-item active">
+                            <img id="img" src="{% static 'media/'%}{{images.image2}}" class="d-block w-100" alt="Wild Landscape"/>
+                          </div>
+                          
+                          <div class="carousel-item">
+                            <img id="img" src="{% static 'media/'%}{{images.image1}}" class="d-block w-100" alt="Camera"/>
+                          </div>
+  
+                          <div class="carousel-item">
+                            <img id="img" src="{% static 'media/'%}{{images.image3}}" class="d-block w-100 " alt="Exotic Fruits"/>
+                          </div>
+  
+                          <div class="carousel-item">
+                            <img id="img" src="{% static 'media/'%}{{images.image4}}" class="d-block w-100 " alt="Exotic Fruits"/>
+                          </div>
+  
+                          <button class="carousel-control-prev" type="button" data-mdb-target="#carouselExampleCaptions" data-mdb-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">Previous</span></button>
+                          <button class="carousel-control-next" type="button" data-mdb-target="#carouselExampleCaptions" data-mdb-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">Next</span></button>
+                        </div>
+  
+                  {% endif %}
+  
+          </div>
+          {% endfor %}
+        </div>
+  
+        
+        <div class="car-body">
+  
+          <h3 class="card-title">{{demande.titre|title}}</h3>
+          <span>{{demande.description|truncatechars:120}}<a href="{% url 'home'%}{{demande.id}}"><i><u>plus details</u></i></a></span><br>
+          <small style="color:rgb(243, 42, 7)">{{demande.created_by}}</small>
+  
+        </div>
+  
+      </div>    
+    </div>
+    {% endfor %}
+  </div>
+  
+  <hr>
+  
+  <di class="row">
+    <div class="col-md-4">
+      <nav aria-label="">
+        {% if liste_articles.has_other_pages  %}
+        <ul class="pagination pagination-circle">
+          {% if liste_articles.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{liste_articles.previous_page_number}}"><span>Précedent</span></a>
+          </li>
+          {% else %}
+          <li class="page-item disabled">
+            <a class="page-link" href="">Précedent</a>
+          </li>
+        {% endif %}
+          {% for i in liste_articles.paginator.page_range %}
+          {% if class.number == i %}
+          <li class="page-item"><a class="page-link active" href="#">{{ i }} <span class="visually-hidden">(current)</span></a></li>
+          {% else %}
+          <li class="page-item"><a class="page-link " href="?page={{i}}">{{i}}</a></li>
+          {% endif %}
+          {% endfor %}
+      
+          {% if liste_articles.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ liste_articles.next_page_number }}">Suivant</a>
+          </li>
+          {% else %}
+          <li class="page-item disabled ">
+            <a class="page-link" href="">Suivant</a>
+          </li>
+          {% endif %}
+        </ul>
+        {% endif %}
+    </div>
+  </div>
+
+  <di class="row">
+    <div class="col-md-4">
+      <nav aria-label="">
+        {% if liste_articles.has_other_pages  %}
+        <ul class="pagination pagination-circle">
+          {% if liste_articles.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{liste_articles.previous_page_number}}"><span>Précedent</span></a>
+          </li>
+          {% else %}
+          <li class="page-item disabled">
+            <a class="page-link" href="">précedent</a>
+          </li>
+        {% endif %}
+          {% for i in liste_articles.paginator.page_range %}
+          {% if class.number == i %}
+          <li class="page-item"><a class="page-link active" href="#">{{i}} <span class="visually-hidden">(current)</span></a></li>
+          {% else %}
+          <li class="page-item"><a class="page-link  " href="?page={{i}}">{{i}}</a></li>
+          {% endif %}
+          {% endfor %}
+      
+          {% if liste_articles.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ liste_articles.next_page_number }}">suivant</a>
+          </li>
+          {% else %}
+          <li class="page-item disabled ">
+            <a class="page-link" href="">suivant</a>
+          </li>
+          {% endif %}
+        </ul>
+        {% endif %}
+    </div>
+  </div>
+{% endblock %}
+

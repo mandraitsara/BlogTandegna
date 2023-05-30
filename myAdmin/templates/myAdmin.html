@@ -1,0 +1,92 @@
+
+{% extends 'myBase.html' %}
+{% block content %}
+{% load static %}
+
+<br>
+<div class="row">
+  <div class="col-md-1">
+    <a class="rounded" data-mdb-toggle="modal" data-mdb-target="#exampleModal" href=""><i class="fas fa-plus-circle"></i></a>
+  </div>
+  <div class="col-md-7">
+
+  </div>
+  <div class="col-md-4">
+      <form class="" action="" method="post">
+          <div class="form-outline mb-4">
+              <input type="email" id="form5Example2" class="form-control"/>
+                <label class="form-label" for="form5Example2">recherche</label>
+          </div>
+      </form>
+  </div>
+</div>
+           
+    
+       <!-- Button trigger modal --
+
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Insertion du produit </h5>
+                  <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">Voulez-vous inserer un article ?</div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-mdb-dismiss="modal">Non</button>
+                  <a href="{% url 'insertion_du_produit' %}"><button type="button" class="btn btn-primary"> Oui</button></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        <table class="table  table-hover">
+                <thead class="bg-light">
+                  <tr>
+                    <th><input type="checkbox" name="" id="">select_id</th>
+                    <th>Id</th>
+                    <th>Titre</th>
+                    <th>Race</th>
+                    <th>Ages</th>
+                    <th>Description</th>
+                    <th>Options</th>
+                    <th>Regions</th>
+                    <th>District</th>
+                    <th>Communes</th>
+                    <th>Date de création</th>
+                    <th>Utilisateur</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for articles in liste_articles %}
+                  {% for user in users %}
+                  {% if user.id == articles.user_id %}
+
+                  
+                  <tr>
+                    <td><input type="checkbox" name="" id=""></td>   
+                    <td>{{articles.id}}</td>
+                    <td>{{articles.titre|title}}</td>
+                    <td>{{articles.race}}</td>
+                    <td>{{articles.ages}}</td>
+                    <td>{{articles.description|truncatechars:80}}<a href="{% url 'home'%}{{articles.id}}">details plus(+)</a></td>
+                    <td>{{articles.options}}</td>
+                    <td>{{articles.regions|title}}</td>
+                    <td>{{articles.district|title}}</td>
+                    <td>{{articles.communes|title}}</td>
+                    <td>{{articles.created_by}}</td>                  
+                    <td>{{user.username|title}}</td>                  
+                  </a>
+                    
+                  </tr>
+               
+                {% endif %}
+                {% endfor %}
+                {% endfor %}
+                </tbody>
+              </table>        
+            
+
+              
+{% endblock %}

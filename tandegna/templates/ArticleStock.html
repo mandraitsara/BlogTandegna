@@ -1,0 +1,54 @@
+{% extends 'baseArticle.html' %}
+
+{% block title %} Stock {% endblock %}
+
+
+{% block breadcrum %}
+{% if id_article  %}
+<li><a href="{% url "stockArticle" id_article.id %}"> / Stock</a></li>
+<li><a href="{% url "ArticlePhotoView" id_article.id %}"> / Photo</a></li>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+
+<div class="tourStock">
+  {% for message in messages %}
+<div class="alert alert-danger alert-dismissible fade show">    
+    <strong> {{ message.tags }}</strong> {{ message }}
+    <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+</div>
+{% endfor %}
+<h3>Stock</h3>
+
+<div class="row">
+
+    <div class="col-md-4">
+
+    </div>
+    <div class="col-md-4">
+        <div class="stockTours">
+          {% if id_article %}
+            <form class="form-control" id="form" action="" method="post">{% csrf_token %}
+              <input type="hidden" value="{{id_article.id}}" name="id_article" >
+                    {{formStockArticle.nombre}}
+                    {{formStockArticle.unites}}
+                      <input id="inputStock" type="submit" class="btn  btn-primary" value="valider">
+            </form>
+            {% endif %}
+
+      </div>
+
+    </div>
+
+    <div class="col-md-4">
+        
+    </div>
+
+</div>
+                
+</div>
+
+{% endblock %}

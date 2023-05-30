@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block banniere %}
+
+{% endblock %}
+
+
+{% block content %}
+
+{% if details_tandegna %}
+
+{{details_tandegna.id}}
+{{details_tandegna.titre}}
+
+{% else %}
+<span>article n'existe pas <a href="{% url 'home' %}">retour</a></span>
+{% endif %}
+{% endblock  %}
+
+
+  

@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %} envoyez-vous l'email  - {{user}} {% endblock %}
+{% block banniere %} {% endblock %}
+{% block recherche %} {% endblock %}
+
+{% block content %}
+
+<style>
+  #form{
+    padding: 10px 10px 10px 10px;
+    
+  }
+
+  #form_textarea{
+    margin-bottom: 10px;
+  }
+
+#enabled:disabled  {
+  color: #aaa;
+}
+
+
+</style>
+
+
+
+      <h3><strong>Envoyer l'email</strong></h3>
+      <a href="{% url 'home' %}">
+      <button type="submit" class="btn btn-primary" id="btnTandegna">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-square-fill" viewBox="0 0 16 16">
+          <path d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1z"/>
+        </svg> 
+        <span class="text-lowercase">retour</span>
+    </button>
+  </a>
+      {% for message in messages %}
+      <div class="alert alert-success alert-dismissible fade show">    
+          <strong> {{ message.tags }}</strong> {{ message }}
+          <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+      </div>
+      {% endfor %}
+      <div class="row">
+        <div class="col-md-4">
+
+        </div>
+        <div class="col-md-4">
+         
+
+      <form method="post" id="form" class="form-control ">{% csrf_token %}
+        
+        {% if super %}
+        <input type="text"  id="enabled" class="form-control" name="recipient" value="{{super.email}} ">
+        <label for="">Comments :</label>  <textarea class="form-control" name="message" id="form_textarea" cols="30" rows="10"></textarea>
+        {% endif %}        
+          <input id="put" type="submit" class="btn btn-success" value="envoyer email"/>
+        
+      </form>
+    
+        </div>
+        <div class="col-md-4">
+          
+        </div>
+      </div>
+
+      
+   
+
+  {% endblock %}
+
+    

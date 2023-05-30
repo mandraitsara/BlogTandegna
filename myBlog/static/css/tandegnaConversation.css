@@ -1,0 +1,25 @@
+body{
+    background-color: rgb(12, 7, 17);
+    font-size: small;
+}
+
+.img_tandegna
+{
+    border-radius: 2px;
+    height: 80%;
+    width: 80%;
+}
+
+.img_tandegna:hover
+{
+    opacity: 0.5;
+    cursor: grab;
+}
+#id_lien{
+    text-decoration: none;
+    color:aqua
+}
+button:hover{
+    opacity: .2;
+
+}

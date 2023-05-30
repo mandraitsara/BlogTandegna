@@ -1,0 +1,45 @@
+{% extends 'baseArticle.html' %}
+
+
+{% block content %}
+
+
+
+{% if id_user %}
+<div class="form-control" id="on_tour">
+<h5>Mon compte:</h5>
+<label class="form-control" for="">type de compte : <span> </span><span style="color:rgb(57, 11, 224)">{{id_user.typeCompte|title }}</span></label>
+<label class="form-control"  for="">pseudo : <span> </span><span style="color:rgb(57, 11, 224)">{{id_user.username|title }}</span></label>
+<label class="form-control"  for="">Nom :<span> </span><span style="color:rgb(57, 11, 224)">{{id_user.first_name|title }}</span></label>
+<label class="form-control"  for="">Prenom : <span> </span><span style="color:rgb(57, 11, 224)">{{id_user.last_name|title }}</span></label>
+<label class="form-control"  for="">Telephone : <span> </span><span style="color:rgb(57, 11, 224)">{{id_user.telephone|title }}</span></label>
+<label class="form-control"  for="">Mode : <span> </span><span style="color:rgb(57, 11, 224)">{{id_user.mode|title }}</span></label>
+<label class="form-control"  for="">date d'arrivée : <span> </span><span style="color:rgb(57, 11, 224)">{{id_user.date_joined|title }}</span></label>
+
+<div class="offcanvas offcanvas-end" id="demo">
+    
+    <div class="offcanvas-header">        
+      <h6 class="offcanvas-title">{{id_user.last_name}}<span>-</span>{{id_user.first_name}}        
+    </div>
+    <div class="offcanvas-body">
+        <form class="form-control" action="" method="post">{% csrf_token %}
+        <label    for="pseudo">pseudo : </label><input class="form-control"  type="text" name="username" value="{{id_user.username|title }}">
+        <label   for="pseudo">Nom</label><input class="form-control"  type="text" name="first_name" value="{{id_user.first_name|title }}">
+        <label  for="pseudo">Prenom</label><input class="form-control"  type="text" name="last_name" value="{{id_user.last_name|title }}">
+        <label   for="pseudo">Telephone</label><input class="form-control"  type="text" name="telephone" value="{{id_user.telephone|title }}">
+        <label   for="pseudo">Mode</label><input class="form-control"  type="text" name="mode" value="{{id_user.mode|title }}">
+      <button class="btn btn-primary" type="submit">enregistrer</button>
+    </form>
+    </div>
+  </div>
+  
+  <div class="container-fluid mt-3">
+    <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo">
+      modification
+    </button>
+  </div>
+</div>
+{% else %}
+<a href="{% url 'login_tandegna' %}"><span>connectez!!!!</span></a>
+{% endif %}
+{% endblock %}

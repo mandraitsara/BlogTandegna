@@ -1,0 +1,350 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="{% static 'logo/logo.png' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.2.0/css/all.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.2.0/css/fontawesome.min.css">
+  <link rel="stylesheet" href="{% static 'css/mdb.min.css' %}" /> 
+  <link rel="stylesheet" href="{% static 'css/tandegnaHome.css' %}" />  
+  <link rel="stylesheet" href="{% static 'css/tandegnaLogin.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/tandegnaPhoto.css' %}" />  
+  <link rel="stylesheet" href="{% static 'css/tandegnaDetails.css' %}" />
+  <title>{% block title %} accueil - {{user.username}}{% endblock %}</title>
+</head>
+
+<body>
+  <div class="container-fluid">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+        </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <a class="navbar-brand mt-2 mt-lg-0" href="{% url 'home' %}">
+                      <img src="{% static 'logo/logo.png' %}" height="60" alt="tandegna Logo" loading="tandegna"/>
+                  </a>
+                  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                      <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">qui sommes nous?</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">à propos</a>
+                    </li>
+                  </ul>
+                </div>
+     
+        <div class="d-flex align-items-center">
+          <a class="link-secondary me-3" href="#">
+            <i class="fas fa-shopping-cart"></i>
+          </a>
+          <div class="dropdown">
+            <a class="link-secondary me-3 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+              <i class="fas fa-bell"></i>
+              <span class="badge rounded-pill badge-notification bg-danger">2</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+              <li>
+                <a class="dropdown-item" href="#">Voir</a>
+              </li>
+            </ul>
+          </div> 
+
+          {% if user.is_authenticated %}
+
+          <div class="dropdown">
+            <a style="color:aqua;" class="dropdown-toggle d-flex align-items-center" data-mdb-toggle="dropdown" role="button" aria-expanded="false">
+              <li class="nav-link">
+                {{user.email}}
+              </li>
+            </a>
+
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+              <li>
+                <a class="dropdown-item" href="#">{{user}}</a>
+              </li>
+              {% if user.typeCompte == "prestateur" %}              
+              <li>
+                <a class="dropdown-item" href="{% url 'insertion_du_produit' %}">insertion du produit</a>
+              </li>
+              {% endif %}
+              <li>
+              {% if user.is_superuser == True %}
+                <a class="dropdown-item" href="{% url "listeAdmin" %}">Listes des Admin</a>
+              {% endif %}
+              </li>
+              <li>
+                <a class="dropdown-item" href="{% url "mon_compte" user.slug user.id %}">mon compte</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="{% url 'logout_tandegna' %}">déconnexion</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {% else %}
+        <div class="dropdown">
+          <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar" role="button" data-mdb-toggle="dropdown" aria-expanded="false"><span style="color:aqua">invité</span></a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+            <li>
+              <a class="dropdown-item" href="{% url 'login_tandegna' %}">Identifiez-vous</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="{% url 'inscription_tandegna' %}">Inscription</a>
+            </li>
+          </ul>
+    
+        </div>
+      
+        {% endif %}           
+    </nav>
+
+    {% block banniere %}
+    <div id="carouselBasicExample" class="carousel slide carousel-fade" data-mdb-ride="carousel">
+      <!-- Indicators -->
+      <div class="carousel-indicators">
+        <button
+          type="button"
+          data-mdb-target="#carouselBasicExample"
+          data-mdb-slide-to="0"
+          class="active"
+          aria-current="true"
+          aria-label="Slide 1"
+        ></button>
+        <button
+          type="button"
+          data-mdb-target="#carouselBasicExample"
+          data-mdb-slide-to="1"
+          aria-label="Slide 2"
+        ></button>
+        <button
+          type="button"
+          data-mdb-target="#carouselBasicExample"
+          data-mdb-slide-to="2"
+          aria-label="Slide 3"
+        ></button>
+      </div>
+    
+      <!-- Inner -->
+      <div class="carousel-inner">
+        <!-- Single item -->
+        <div class="carousel-item active">
+          <img src="{% static 'photo/image_3.jpg' %}" class="d-block w-100" alt="Sunset Over the City"/>
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Promotion lehibe</h5>
+            <p>prix abordable</p>
+          </div>
+        </div>
+    
+        <!-- Single item -->
+        <div class="carousel-item">
+          <img src="{% static 'photo/image_1.jpg' %}" class="d-block w-100" alt="Canyon at Nigh"/>
+          <div class="carousel-caption d-none d-md-block">
+            <h5>tsy ahita ohatran'ity intsony ianareo</h5>
+            <p>prix abordable</p>
+          </div>
+        </div>
+    
+        <!-- Single item -->
+        <div class="carousel-item">
+          <img src="{% static 'photo/image_2.jpg' %}" class="d-block w-100" alt="Cliff Above a Stormy Sea"/>
+          <div class="carousel-caption d-none d-md-block">
+            <h5>vonjivonjeo</h5>
+            <p>serieux.</p>
+          </div>
+        </div>
+      </div>
+      <!-- Inner -->
+    
+      <!-- Controls -->
+      <button class="carousel-control-prev" type="button" data-mdb-target="#carouselBasicExample" data-mdb-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Precedent</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-mdb-target="#carouselBasicExample" data-mdb-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Suivant</span>
+      </button>
+    </div>
+    {% endblock %}
+    
+    {% block recherche %}
+    
+    <div class="recherche">
+        <div class="row">
+         
+          
+
+          <div class="col-md-8">            
+            <form class="form-control" action="{% url 'filtreTandegna' %}" method="POST"> {% csrf_token %}
+              
+
+              <small>options:</small>
+              <select class="form-select-lg"  value="" name="options" id="">
+                <option style="color:red" value="{{options}}">{{options}}</option>
+                <option value="Demande">Demande(mitady)</option>
+                <option value="Offre">Offre(tolotra)</option>
+              </select>
+
+
+              <small>categorie:</small>
+
+              <select class="form-select-lg "  name="categories" id="">
+                <option style="color:red" value="{{categories}}">{{categories}}</option>
+                <option value="Porc">Porc(kisoa)</option>
+                <option value="Boeuf">Boeuf(omby)</option>
+                <option value="Provende">Provende(provandy)</option>
+              </select>
+
+             
+
+              <small>race</small>
+              <select class="form-select-lg" name="race" id="">
+                <option style="color:red" value="{{race}}">{{race}}</option>
+                <option value="Landrace">Landrace</option>
+                <option value="Large-White">Large White</option>
+                <option value="Middle_White">MiddleWhite</option>
+              </select>              
+              <input type="submit" class="btn btn-info btn-md" value="valider">
+            </form>              
+          
+          </div>
+      
+
+        
+          <div class="col-md-4">
+            <div id="recherche">
+            <form action="{% url 'rechercheTandegna' %}">
+              <div class="input-group">
+                <div id="navbar-search-autocomplete" class="form-outline">                
+                  <input name="RechercheArticleTandegna" value="{{query}}" type="search" id="form1" class="form-control" />
+                  <label class="form-label" for="form1">recherche</label>
+                </div>
+                <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+              </div>
+            </form>
+          </div>
+          </div>
+      
+        
+        </div>
+  </div>
+
+    {% endblock %}
+
+  {% block content %}
+
+  {% endblock %}
+  
+
+
+  {% block footer %}
+  <footer class="text-center text-lg-start bg-dark text-muted">
+    <!-- Section: Social media -->
+    <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+      <!-- Left -->
+      <div class="me-5 d-none d-lg-block">
+        <span>Connecter sur les réseaux sociaux :</span>
+      </div>
+      <!-- Left -->
+  
+      <!-- Right -->
+      <div>
+        <a href="https://www.facebook.com/ZafyPaul/" class="me-4 link-secondary">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="" class="me-4 link-secondary">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="" class="me-4 link-secondary">
+          <i class="fab fa-google"></i>
+        </a>
+        <a href="" class="me-4 link-secondary">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="" class="me-4 link-secondary">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="" class="me-4 link-secondary">
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+      <!-- Right -->
+    </section>
+    <!-- Section: Social media -->
+  
+    <!-- Section: Links  -->
+    <section class="row">
+      
+        <!-- Grid row -->
+        <div class="row">
+          <!-- Grid column -->
+          
+          <!-- Grid column -->
+  
+          <!-- Grid column -->
+          
+          <h6 id="Mycontact" class="text-uppercase">Contact</h6>
+          <div class="col-md-5">            
+            {% block message %}
+            <form class="form-control" id="myForm" action="{% url "mailTandegna" %}" method="post">{% csrf_token %} 
+              <h6 style="color:blue"><u> envoyer l'email chez Tandegna:</u></h6>
+              <input class="form-control"  name="subject" placeholder ="votre email / ou votre numero" id="myInput" type="text">             
+              <textarea class="form-control "  id="myInput" name="message" id="" cols="30" rows="10"></textarea>
+              <input class=" btn btn-primary" id="myInput" type="submit" value="envoyer">
+            </form>
+            {% endblock %}
+          </div>
+          
+          <div class="col-md-3">
+            <!-- Links -->
+            
+            <p><i class="fas fa-home me-3 text-secondary"></i>IIS 226 AB <sup>ter</sup> J Namontana Madera</p>
+            <p>
+              <i class="fas fa-envelope me-3 text-secondary"></i>
+              tandegna@gmail.com
+            </p>
+            <p><i class="fas fa-phone me-3 text-secondary"></i> +261 34 95 593 74</p>
+            <p><i class="fas fa-print me-3 text-secondary"></i> +261 34 15 313 83</p>
+          </div>
+          <!-- Grid column -->
+        </div>
+        <!-- Grid row -->
+      
+    </section>
+    <!-- Section: Links  -->
+    
+    <!-- Copyright -->
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.025);">
+      © 2023 Copyright:
+      <a class="text-reset fw-bold" href="https://mdbootstrap.com/">tandegna.mg</a>
+    </div>
+  
+    
+  </footer>
+  
+  
+  {% endblock %}
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script> 
+  <script type="text/javascript" src="{% static 'js/tandegnaPhoto.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/tandegnaTabs.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/tandegnaDetails.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/tandegna.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.2.0/js/fontawesome.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.2.0/js/all.min.js"></script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+.contour{
+    
+    border: 5px solid;
+    border-color:rgb(71, 6, 67);
+    border-radius: 2px;
+    padding: 5px 5px 5px 5px;
+    margin: 5px 5px 5px 5px;
+
+
+
+
+}
+#imgTandegna{
+    position:relative;
+    width: 100%;
+}
+
+#form-control{
+    margin: 5px 5px 5px 5px;
+    padding: 10px 10px 10px 10px;
+    
+    
+}
+
+#textInput{
+    padding: 5px 5px 5px 5px;
+}
+
+#boutton{
+    margin: 2px 2px 2px 2px;
+
+}
+
+.contour:hover {
+    transition: .5;
+    border-color:rgb(5, 169, 245);
+
+}

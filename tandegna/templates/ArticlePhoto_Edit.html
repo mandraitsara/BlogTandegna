@@ -1,0 +1,71 @@
+
+{% extends 'baseArticle.html' %}
+{% load static %}
+{% block title %} Photo - Edition {% endblock %}
+
+{% block breadcrum %}
+<li><a href=""> / Photo</a></li>
+<li><a href="{% url "insertion_du_produit" %}"> / Produit</a></li>
+{% endblock %}
+{% block photo %}<button class="tablink">  Photo-View : </button>{% endblock %}
+{% block content %}
+
+{% for message in messages %}
+<div class="alert alert-danger alert-dismissible fade show">    
+  <strong> {{ message.tags }}</strong> {{ message }}
+  <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{% endfor %}
+<div class=" form-control text-primary" style="background-color: aquamarine;">
+  
+    {% if myEdit %}
+    <h5 style="color:blueviolet">Changement d'image : id_{{myEdit.id}}</h5>
+    <form method="POST" action=""  enctype="multipart/form-data">{% csrf_token %}
+      <div class="row">
+        <div class="col-md-3">
+          <span>image premiere</span>
+        </div>
+        <div class="col-md-3">
+          image second
+        </div>
+        <div class="col-md-3">
+          image troisième
+        </div>
+        <div class="col-md-3">
+          image quatrième
+        </div>
+      </div>
+      
+
+      <div class="row">
+        <div class="col-md-3">          
+          {{form.image1}}<img id="imgtandegna" src="{% static "media/"%}{{myEdit.image1}}" alt="{{myEdit.image1}}">
+        </div>
+        <div class="col-md-3">
+          {{form.image2}}<img id="imgtandegna" src="{% static "media/"%}{{myEdit.image2}}" alt="{{myEdit.image2}}">
+        </div>
+        <div class="col-md-3">
+          {{form.image3}}<img id="imgtandegna" src="{% static "media/"%}{{myEdit.image3}}" alt="{{myEdit.image3}}">
+        </div>
+        <div class="col-md-3">
+          {{form.image4}}<img id="imgtandegna" src="{% static "media/"%}{{myEdit.image4}}" alt="{{myEdit.image4}}">
+        </div>
+      </div>
+      <button class="btn btn-success" type="submit">modifier</button>
+    </form>
+    {% endif %}
+
+
+
+
+
+
+
+<!-- File input field -->
+
+<!-- Image preview -->
+
+
+{% endblock %}
