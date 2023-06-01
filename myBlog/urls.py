@@ -29,6 +29,7 @@ urlpatterns = [
     path('', include('conversation.urls')),
     path('cart/', include('cart.urls')),
     path('', include('mailaka.urls')),
+    path("", include('djangoJson.urls'))
 
     #path('',include('django_email.urls'))
     #path('', include('myAdmin.urls')),

@@ -198,9 +198,13 @@ def myAdmin(request):
     users = User.objects.all()
     return render(request, 'myAdmin.html',{'liste_articles':liste_articles, 'users':users})
 
+def insertion_du_produit_edit(request):
+    return render(request,"insertion_du_produit_Edit.html")
+
+
+
 def insertion_du_produit(request):
     form = ArticleForm()
-
     if request.method=='POST':
         form = ArticleForm(request.POST)
         if form.is_valid():
@@ -218,10 +222,7 @@ def insertion_du_produit(request):
             adresseComplet = request.POST['adresseComplet']
             telephone = request.POST['telephone']
             telephoneB = request.POST['telephoneB']
-            user_id = request.POST['user_id']
-
-            
-            #images = request.POST['images']
+            user_id = request.POST['user_id']            
             articles = Article(titre=titre,race=race,ages=ages,description=description,poids=poids,options=options,categories=categories,regions=regions,district=district,communes=communes,adresseComplet=adresseComplet, telephone=telephone, telephoneB=telephoneB,prix=prix, user_id=user_id)
             articles.save()
             lastId = Article.objects.latest('id').id
@@ -258,10 +259,24 @@ def mon_compte(request, slug, id):
 
     return render(request, "mon_compte.html",context)
 
+def existePhoto(request, lastId):
+    lastId = Article.objects.get(id=lastId)
+    photoArticle = ArticlePhoto.objects.all()
+    formPhoto = (request.FILES, request.POST)
+    context = {'form':formPhoto, 'lastId':lastId}
+    for photo in photoArticle:
+        if lastId.id == photo.id:
+            return render(request, 'ArticlePhoto_Edit.html',context)
+        else:
+            return render(request, 'ArticlePhoto.html', context)
+        
 def ArticlePhotoView(request,lastId):
     lastId = Article.objects.get(id=lastId)
+    photoArticle = ArticlePhoto.objects.all()
     formPhoto = ArticlePhotoForm(request.FILES, request.POST)
-    # form = ArticleForm() 
+    context = {'form':formPhoto, 'lastId':lastId} 
+
+    formPhoto = ArticlePhotoForm(request.FILES, request.POST)
     if request.method =="POST":
                 formPhoto = ArticlePhotoForm(request.FILES, request.POST)
                 image1 = request.FILES["image1"]
@@ -271,37 +286,40 @@ def ArticlePhotoView(request,lastId):
                 lastId = request.POST["lastId"]
                 photo = ArticlePhoto(image1=image1,image2=image2,image3=image3,image4=image4,article_id=lastId)
                 photo.save()
-                myLast = ArticlePhoto.objects.latest('id').id
-                messages.error(request, "enregistrement effectué")
+                messages.success(request, "enregistrement effectué")
                 context = {
-                    'fomrPhoto':formPhoto,
-                    'id':lastId,
-                    'myLast':myLast
+                    'form':formPhoto,
+                    'myEdit':lastId,
+                    'photoArticle':photoArticle
+                    #'myLast':myLast
                 }
-                return render(request, 'ArticlePhoto.html',context)
+                return render(request, 'ArticlePhoto_Edit.html',context)
     else:
-        return render(request, 'ArticlePhoto.html', {'formPhoto':formPhoto,'id':lastId})
+        return render(request, 'ArticlePhoto.html', {'formPhoto':formPhoto,'lastId':lastId,'photoArticle':photoArticle})
 
 
-def ArticlePhotoViewEdit(request, id):
+def ArticlePhotoViewEdit(request,id):
     form = ArticlePhotoForm(request.POST, request.FILES)
     myEdit = ArticlePhoto.objects.get(id=id)
     context = {
         'form':form,
-        'myEdit':myEdit       
+        'myEdit':myEdit 
         }
     
     if request.method == "POST":
-        if form.is_valid():
+        if form.is_valid():            
+            id = request.POST['id']
             image1 = request.FILES['image1']
             image2 = request.FILES['image2']
             image3 = request.FILES['image3']
             image4 = request.FILES['image4']
+            myEdit = ArticlePhoto.objects.get(id=id)
             myEdit.image1 = image1
             myEdit.image2 = image2
             myEdit.image3 = image3
-            myEdit.image4 = image4   
+            myEdit.image4 = image4
             myEdit.save()
+            context = { 'form':form, 'myEdit':myEdit}
             messages.success(request, "La valeur est bien modifié")
             return render(request, 'ArticlePhoto_Edit.html', context)
         else:

@@ -4,7 +4,7 @@
 {% block breadcrum %}
 
 <a href="{% url 'insertion_du_produit' %}">| Produits</a>
-{% if lastId %}<a href="{% url "ArticlePhotoView" lastId %}">| Photo</a>{% endif %}
+{% if lastId %}<a href="{% url "existePhoto" lastId %}">| Photo</a>{% endif %}
 {% if lastId %}<a href="{% url 'stockArticle' lastId %}">| Stock</a>{% endif %}
 
 {% endblock %}
@@ -26,8 +26,10 @@
 </div>
 {% endfor %}
 
+{% if lastId %}
+<h5>modification</h5>
 
-              <form method="POST" action="{% url 'insertion_du_produit' %}" class="row g-3 needs-validation"  novalidate>{% csrf_token %}
+              <form method="POST" action="{% url 'insertion_du_produit_edit' %}" class="row g-3 needs-validation"  novalidate>{% csrf_token %}
               <input type="hidden" name="user_id" value="{{user.id}}">
               <div class="col-md-12 position-relative">
                 <label>Titre:</label>
@@ -96,6 +98,79 @@
                   <button class="btn btn-primary" type="submit">valider</button>
                 </div>
               </form>
+{% else %}
+
+
+<form method="POST" action="{% url 'insertion_du_produit' %}" class="row g-3 needs-validation"  novalidate>{% csrf_token %}
+  <input type="hidden" name="user_id" value="{{user.id}}">
+  <div class="col-md-12 position-relative">
+    <label>Titre:</label>
+      {{form.titre}}
+  </div>
+
+  <div class="col-md-2">      
+    <label>Options</label>{{form.options}}      
+    <div class="invalid-tooltip">Demande ou Offre?</div>
+</div>
+
+<div class="col-md-2">
+    <label id="r_lbl">Prix:<i class="fas fa-exclamation-circle trailing"></i></label>{{form.prix}} 
+  </div>
+
+  <div class="col-md-2">
+    <label>Categories :</label> {{form.categories}}
+  </div>
+
+  <div class="col-md-2">
+    <label id="lbl">Race:</label>{{form.race}}
+    
+  </div>
+
+  <div class="col-md-2 position-relative">
+      <label>Ages :</label>{{form.ages}}      
+      
+  </div>
+
+  <div class="col-md-12">
+    <label>Description :</label>
+      {{form.description}}
+  </div>
+
+  <div></div>
+    <div class="col-md-2">
+        <label>Poids (/kg):</label>{{form.poids}}
+    </div>
+
+    <div class="col-md-2">
+        <label id="r_lbl">Telephone 1 :<i class="fas fa-exclamation-circle trailing"></i></label>{{form.telephone}} 
+      </div>
+
+      <div class="col-md-2 position-relative">
+        <label id="r_lbl">Telephone 2 :<i id="telephone" class="fas fa-exclamation-circle trailing"></i></label>{{form.telephoneB}} 
+      </div>
+
+
+    <div class="col-md-2 position-relative">
+        <label id="r_lbl">Regions:</i></label>{{form.regions}} 
+    </div>
+
+    <div class="col-md-3 position-relative">
+      <label id="r_lbl">District:</i></label>{{form.district}} 
+    </div>
+    <div class="col-md-3 position-relative">
+      <label id="r_lbl">Communes:<i id="communes" class="fas fa-exclamation-circle trailing"></i></label>{{form.communes}} 
+    </div>
+
+
+    <div class="col-md-4 position-relative">
+      <label id="r_lbl">Adresse Complet:<i id="adresseComplet" class="fas fa-exclamation-circle trailing"></i></label>{{form.adresseComplet}} 
+    </div>
+
+    <div class="col-md-12">
+      <button class="btn btn-primary" type="submit">valider</button>
+    </div>
+  </form>
+{% endif %}
  
             
 

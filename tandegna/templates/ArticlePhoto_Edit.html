@@ -22,7 +22,9 @@
   
     {% if myEdit %}
     <h5 style="color:blueviolet">Changement d'image : id_{{myEdit.id}}</h5>
-    <form method="POST" action=""  enctype="multipart/form-data">{% csrf_token %}
+
+    <form method="POST" action="{% url "ArticlePhotoViewEdit" myEdit.id %}"  enctype="multipart/form-data">{% csrf_token %}
+      <input type="text" value="{{myEdit.id}}" name="id" id="">
       <div class="row">
         <div class="col-md-3">
           <span>image premiere</span>
