@@ -1,0 +1,98 @@
+{% extends 'baseEspace/page.html' %}
+{% block title %} Prestateur - {{user.email}} {% endblock %}
+{%block content %}
+{% if user.is_authenticated %}
+<div class="p-5 d-flex align-items-start prestateur">
+    <ul class="nav nav-pills flex-column nav-pills border-end border-3 me-3 align-items-end" id="pills-tab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link text-primary fw-semibold active position-relative" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Produits</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link text-primary fw-semibold position-relative" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link text-primary fw-semibold position-relative" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</button>
+      </li>
+    </ul>
+    <div class="tab-content border rounded-3 border-primary p-3 text-danger w-100" id="pills-tabContent">
+      <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+        <h2>Insertion du produit:</h2>
+        <div class="row">
+            <div class="col-md-4">              
+              <form action="">
+              {{produitsform}}
+              <input type="submit" class="btn btn-primary sub" value="valider">            
+            </div>
+            <div class="col-md-8">              
+              <div class="row">
+                    <div class="col-md-4">
+                      <h5>category</h5>
+                      <select name="category" id="category" class="form-control">
+                        {% for category in category %}                        
+                      <option id="category" value="{{category.id}}">{{category.titre}}</option>
+                      {% endfor %}
+                    </select>
+                    <input type="hidden" class="type" value="" >
+                        {% for race in race %}
+                        <div class="race race-{{race.produitcategory_id}}">                  
+                          <input type="radio" class="category_id-{{race.produitcategory_id}}" name="race" id="race-{{race.produitcategory_id}}" value="{{race.id}}"><label class="race" for="{{race.produitcategory_id}}">{{race.titre}}</label>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="col-md-6">
+                       <!-- Tab links -->
+                        <div class="tab">
+                          <button class="tablinks" onclick="openCity(event, 'Photo')">Photo</button>
+                          <button class="tablinks" onclick="openCity(event, 'Stock')">Stock</button>
+                          <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
+                        </div>
+
+                      <!-- Tab content -->
+                      <div id="Photo" class="tabcontent">
+                        <h3>London</h3>
+                        <p>London is the capital city of England.</p>
+                      </div>
+
+                      <div id="Stock" class="tabcontent">
+                        <h3>Paris</h3>
+                        <p>Paris is the capital of France.</p>
+                      </div>
+
+                      <div id="Tokyo" class="tabcontent">
+                        <h3>Tokyo</h3>
+                        <p>Tokyo is the capital of Japan.</p>
+                      </div> 
+                    </div>
+                    
+              </div>              
+              <div class="row">
+                <div class="col-md-12"> 
+                
+              
+              </form>
+            </div>
+            <div class="col-md-4"></div>
+            </div>
+          </div>
+          
+        </div>
+        
+      </div>
+      <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+        <h2>Profile</h2>
+        <p>Please check our more design @ <a target="_blank" href="https://codepen.io/Gaurav-Rana-the-reactor">Codepen</a></p>
+      </div>
+      <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+        <h2>Contact</h2>
+        <p>Please check our more design @ <a target="_blank" href="https://codepen.io/Gaurav-Rana-the-reactor">Codepen</a></p>
+      </div>
+    </div>
+  </div>
+{% else %}
+<script type="text/javascript">
+  alert("Vous devez faire l\'identification")
+  window.location.href = '/blog/blogLogin/'
+</script>
+{%endif%}
+{%endblock%}

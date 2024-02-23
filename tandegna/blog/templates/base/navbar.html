@@ -1,0 +1,84 @@
+
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-tandegna ">
+  <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <i class="fas fa-bars"></i>
+    </button>
+  <div class="row">
+        <div class="col-md-4">
+          <div class="contact_info">
+            <div class="row">
+              <div class="col-md-4"><label for="mail">Lot</label></div><div class="col-md-8">{{lot}}</div>
+            </div>
+            <div class="row">
+              <div class="col-md-4"><label for="mail">Adresse</label></div><div class="col-md-8">{{adresse}}</div>
+            </div>
+            <div class="row">
+              <div class="col-md-4"><label for="mail">Mail</label></div><div class="col-md-8">{{mail}}</div>
+            </div>
+            <div class="row">
+              <div class="col-md-4"><label for="mail">N° Telephone</label></div><div class="col-md-8">{{telephone}}</div>
+            </div>
+            <div class="row">
+              <div class="col-md-4"><label for="mail">Postal</label></div><div class="col-md-8">{{postal}}</div>
+            </div>
+            </div>  
+          </div>
+    
+
+    <div class="col-md-4">      
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <a class="navbar-brand mt-2 mt-lg-0" href="{% url 'home' %}">
+                      <img class="logo " src="{% static 'logo/logo.png' %}"  alt="tandegna Logo" loading="tandegna"/>
+                  </a>
+            </div>
+     </div>   
+     
+     <div class="col-md-4" >
+      <div class="row">
+        <div class="col-md-4">
+          <div class="mon_compte">
+            {% if user.is_authenticated %}
+              <span id='user_mail'>{{user}}</span>                
+              {% else %}
+                <a class="ancre_compte" href="{% url "blogLogin" %}"><i class="fa-regular fa-user user_td"></i>mon compte</a>
+            {% endif %}
+          </div>
+        </div>
+        <div class="col-md-4"> 
+          <div class="cartblog">
+            <i class="fas fa-cart-plus"></i><a class="ancre_compte ancre_achat" href="">achat</a>
+          </div>
+        </div>
+        <div class="col-md-4"> 
+          <div class="cartblog">
+            <i class="fa fa-address-book" aria-hidden="true"></i><a class="ancre_compte ancre_contact" href="{% url 'homeContact' %}">Contact</a>
+          </div>
+        </div>
+      </div>
+        {% if user.is_authenticated %}
+        <div class="espace">
+        {% if user.is_superuser == True %}
+          <a href="{% url 'superadmin' %}">Espace panel</a>
+          {% else %}               
+              {% for subscribe in subscribe %}
+                {% if subscribe.user_id == user.id %}
+                    {% if subscribe.type == 'client' %}
+                    <a href="{% url 'clients' %}">Espace panel</a>
+                        {% elif subscribe.type == 'prestateur' %}
+                          <a href="{% url 'prestateur' %}">Espace panel</a>
+                    {% endif %}              
+                {% endif %}                
+              {% endfor %}                          
+               {% comment %} <a class="{% if subscribe.user_id != user.id %}invisible{% endif %}" href="{% url 'subscribecomplete' %}">Espace panel</a> {% endcomment %}
+          {% endif %}
+        </div>
+            <div class="logout">
+              <a class="logout_a" href="{% url 'blogLogout' %}"><i class="fa fa-sign-out logout_fa" aria-hidden="true"></i>déconnexion</a>
+            </div>
+
+        {% endif %}
+  </div>   
+
+
+</nav>

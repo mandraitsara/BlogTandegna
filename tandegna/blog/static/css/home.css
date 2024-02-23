@@ -1,0 +1,139 @@
+h1{
+    text-transform: uppercase;
+      color:var(--color) !important;
+
+}
+h1:hover{
+    color:var(--hover) !important;
+}
+
+
+
+.navbar.navbar-expand-lg.navbar-dark.bg-dark.navbar-tandegna {
+    background-color: #4f4f4f !important;
+    box-shadow: none !important;
+}
+
+.nav-link{
+    color:var(--color) !important;
+}
+
+.nav-link:hover{
+    color:var(--hover)!important;
+}
+.logo{
+    max-width: 85%;
+
+}
+.cartblog {
+  color: var(--color);
+  font-size: 24px;
+}
+.mon_compte{
+    position: relative;
+    align-items: flex-end;}
+
+.ancre_compte {
+    font-size: 17px;
+    color: var(--colorPrincipale);
+  }
+  .contact_info{
+    font-size: 16px;
+    color: var(--colorPrincipale);
+  }
+
+  .fa-regular.fa-user.user_td {
+    color: var(--color);
+    font-size: 30px;
+    padding-right: 10px;
+  }
+
+  a:hover {
+    text-decoration: none;
+    color: var(--colorPrincipale) !important;
+    opacity: var(--opacity);
+  }
+
+  .workflow {
+    display: inline;
+    text-transform: uppercase;
+    padding-left: 15px;
+    list-style: none;
+  }
+
+  .espace {
+    box-shadow: blanchedalmond;
+    border-radius: 11px;
+    text-align: center;
+    font-size: 26px;
+    border: 5px solid var(--color);
+    
+  }
+  .espace a {
+    color: var(--hover) !important;
+  }
+  .espace a:hover{
+    color: var(--banniere) !important;
+  }
+
+  .logout {
+    text-align: center;
+    margin-top: 15px;
+    text-transform: uppercase;
+    outline: double;
+  }
+
+
+  .espace:hover {
+    background-color: var(--colorPrincipale);
+    cursor:grab;
+    
+  }
+  .workflow:hover{
+    cursor: grab;
+    opacity: var(--opacity);
+
+  }
+
+  .workflow-vue {
+    background-color: var(--banniere);
+    padding-bottom: 10px;
+    padding-top: 10px;  
+
+  }
+  
+  .btn.btn-primary.sub-admin {
+    width: 100%;
+    margin-top: 15px;
+    background-color: var(--banniere);
+    box-shadow: none !important;
+  }
+
+  .logout_a {
+    color: var(--colorPrincipale);
+    font-size: 21px;
+    text-align: center;
+    position: relative;
+    line-height: inherit;
+  }
+
+  .fa.fa-sign-out.logout_fa {
+    margin-right: 5px;
+    color: var(--color);
+  }
+
+  .img_subscrib{
+    display:none;
+  }
+
+  .errorlist {
+    list-style: none;
+    text-align: end;
+    text-transform: lowercase;
+    color: var(--color);
+  }
+
+
+  .toast {
+    background-color: var(--mdb-danger) !important;
+  }

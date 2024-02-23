@@ -1,0 +1,26 @@
+{% extends 'base/page.html' %}
+{% block title %}Plus d'information{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Completez vos information necessaires</h2>
+            <form  method="POST" action="{% url 'subscribecomplete' %}">{% csrf_token %}
+                <input type="hidden" name="user" value="{{user.id}}">
+                {{subscribeForm}}
+                <input type="submit" value="valider" class="btn-sub">                
+                
+            </form>
+          
+          
+        </div>
+        <div class="col-md-6">
+            <div class="img-tandegna">
+
+            </div>
+        </div>    
+    </div>
+    
+    <div class="pack-tandegna">
+
+    </div>
+{% endblock %}

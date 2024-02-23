@@ -1,0 +1,29 @@
+{% extends 'base/page.html' %}
+{% block title %} contact {% endblock %}
+{% block content %}
+<div id="contact" class="contact">
+    <h2 class="h1_title">Envoyez-nous d'Email: </h2>
+    {% for message in messages %}
+        {% if message.tag == "error" %}
+        <div class="alert alert-danger alert-dismissible fade show">           
+            <span></span>{{ message }}
+            <button type="button" class="btn-close btn-close-white" aria-label="Close"></button>
+            <button type="button" class="btn-close btn-close-white" disabled aria-label="Close"></button>
+            
+        </div>
+        {% else %}
+        <div class="alert alert-success alert-dismissible fade show">            
+            {{ message }}
+            <button type="button" class="btn-close btn-close-white" aria-label="Close"></button>
+            <button type="button" class="btn-close btn-close-white" disabled aria-label="Close"></button>            
+        </div>
+        {% endif %}
+    {% endfor %} 
+    <div class="contact-contenu">
+        <form action="{% url 'sendmail' %}" method="POST">{% csrf_token %}
+            {{contactform}}
+            <button type="submit" class="btn-sub">envoyé</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

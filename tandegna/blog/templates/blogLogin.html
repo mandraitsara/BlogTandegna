@@ -1,0 +1,42 @@
+
+{% extends 'base/page.html' %}
+{% load static %}
+{% block title %} BlogLogin {% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-md-6 col-xs-6">
+        <img class="logo" src="{% static 'logo/logo.png' %}"  alt="tandegna Logo" loading="tandegna"/>
+        <form action="{% url 'blogLogin' %}" method="POST">{% csrf_token %}
+            {% for message in messages %}
+        
+            <div class="toast show fade" role="alert" aria-live="assertive" aria-atomic="true" >
+              <div class="toast-body">
+                <span>{{message}}</span>
+              </div>
+            </div>
+
+
+        
+        
+        {% endfor %}            
+            {{logform}}
+            <input type="checkbox" name="dtk_password" id="dtk_password" class="dtk_password ind" ><label for="mdp">affiché le mot de passe</label> <br>
+            <a class="a_login mdp_login" href="">mot de passe oublié?</a>
+            <input class="btn-sub " type="submit" value="valider">
+            
+            <p class="p_login">
+                <span>
+                    <input type="checkbox" name="cond" id="cond"> acceptez-vous toutes les <a class="a_login" href="">conditions...?</a><br>
+                    Vous êtes nouveau?: <a class="a_compte" href="{% url 'blogInscription' %}"> Je m'inscris gratuitement</a>
+                </span>             
+            </p>
+           
+
+        </form>
+        
+    </div>
+    <div class="col-md-6 col-xs-6 photo_subscrib">
+        <img class="img-fluid img_subscrib"src="{% static 'img/porcs.png' %}" alt="">
+    </div>
+</div>
+{%  endblock %}

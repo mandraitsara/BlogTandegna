@@ -1,0 +1,58 @@
+.forms-ctr:hover {
+    border-color: var(--hover);
+    box-shadow: inset 0 0 0 1px var(--hover);
+  }
+.forms-ctr:focus{
+    border-color: var(--hover);
+    box-shadow: inset 0 0 0 1px var(--hover) !important;
+}
+
+.btn-sub {
+    min-height: 50px;
+    min-width: 100%;
+    margin-top: 5px;
+    background-color: #fff;
+    border-radius: 10px;
+    color: var(--banniere);
+    font-size: 25px;
+    font-weight: 600;
+
+  }
+
+  .btn-sub:hover {
+    border-color: var(--hover);
+    background-color: var(--banniere);
+    color: var(--hover);
+  }
+
+  .a_login {
+    color: var(--color);
+    text-decoration: solid !important;
+  }
+
+  .a_login:hover{
+    color: var(--color) !important;
+    text-decoration: solid !important;
+  }
+
+  .a_compte {
+    color: var(--color);
+    text-decoration: solid !important;
+  }
+
+  .a_compte:hover{
+    color: var(--color) !important;
+    text-decoration: solid !important;
+  }
+
+  .mdp_login {
+    display: flex;
+    float: right;
+  }
+
+  .photo_subscrib{
+    background-image: url("/static/img/porcs.png");
+    background-size: cover;
+  }
+
+  

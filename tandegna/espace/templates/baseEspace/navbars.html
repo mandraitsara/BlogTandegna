@@ -1,0 +1,28 @@
+{% if user.is_authenticated %}
+<div class="espacePanel {% if user.is_superuser == True %} admin {% else %}{% for subscribe in subscribe %}{% if subscribe.user_id == user.id %}{% if subscribe.type == "prestateur" %}prestateur{% endif %}{% endif %}{% endfor %}{% endif %}"> 
+  <div class="row">
+    <div class="col-md-4">
+      <a class="espace-ancre" href="{% url 'home' %}"><i class="bi-house-door"></i></a>
+    </div>
+    <div class="col-md-4">
+      
+    </div>
+    <div class="col-md-4">
+      <div class="row">
+        <div class="col-md-4">
+          
+        </div>
+        <div class="col-md-4">
+          <a class="espace-ancre" href=""><i class="bi bi-envelope"></i><span class="badge bg-danger">4</span></a>
+          <a class="espace-ancre espace-user user-people" href=""><i class="bi-people"></i><span class="badge bg-danger">4</span></a>
+          <a class="espace-ancre espace-user" href=""><i class="bi-person-circle"></i></a>
+        </div>
+        <div class="col-md-4">          
+          <a class="espace-ancre espace-user" href="{% url 'blogLogout' %}"><i class="bi-arrow-right-square-fill"></i>deconnexion</a>
+        </div>
+      </div>
+    </div>
+  </div>  
+</div>
+{% else %}
+{% endif %}

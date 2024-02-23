@@ -1,0 +1,9 @@
+<div class="workflow-vue">
+    <div class="container">
+        {% for workflow in workflow %}            
+            <div class="workflow workflow-v-{{workflow.id}}" data-value="{{workflow.id}}">
+                    {{workflow.titre}}
+            </div>
+        {% endfor %}
+    </div>
+</div>

@@ -1,0 +1,32 @@
+
+{% extends 'base/page.html' %}
+{% load static %}
+{% block title %} BlogLogin {% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        {% for message in messages %}
+              <div class="alert alert-danger alert-dismissible fade show">    
+                  <span> {{ message.tags }}</span> {{ message }}
+                  <button type="button" class="btn-close btn-close-white" aria-label="Close"></button>
+                   <button type="button" class="btn-close btn-close-white" disabled aria-label="Close"></button>
+              </div>
+        {% endfor %} 
+        <img class="logo" src="{% static 'logo/logo.png' %}"  alt="tandegna Logo" loading="tandegna"/>
+        <form action="" method="POST" > {% csrf_token %}
+             {{logform}}
+            <input class="btn-sub " type="submit" value="valider">
+            <p class="p_login">
+                <span>
+                    Vous avez déjà un compte: <a class="a_login"href="{% url 'blogLogin' %}">Identifiez-vous</a>
+                </span>             
+            </p>
+           
+
+        </form>
+        
+    </div>
+    <div class="col-md-6 photo_subscrib">        
+    </div>
+</div>
+{%  endblock %}

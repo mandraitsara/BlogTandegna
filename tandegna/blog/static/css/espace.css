@@ -1,0 +1,146 @@
+@import url('variables.css');
+body{
+  background-color: var(--bgcolor) !important;
+  color: var(--colorPrincipale) !important;
+  font-family: var(--font-family) !important;
+  
+}
+.espacePanel {
+  min-height: 50px;
+  padding: 15px;
+  background-color: var(--banniere);
+}
+
+.espacePanel.prestateur {
+  background-color: rgb(160, 128, 148);
+}
+
+.espacePanel.clients{
+  background-color:black;
+}
+
+.espacePanel.admin{
+  background-color: rgb(167, 24, 60);
+}
+
+.badge.bg-danger {
+  border: 2px solid red;
+  border-radius: 50%;
+  padding-top: 20px;
+  
+}
+
+.espace-ancre {
+  color: var(--hover);
+  padding-left: 25px;
+  font-size: 25px;
+}
+
+.espace-ancre a:hover {
+  color: var(--hover) !important;
+  padding-left: 5px;
+  opacity:var(--opacity);
+  transition: .2s;
+}
+
+
+.badge {
+  display: inline-block;
+  padding: 2px !important;
+  font-size: 17px;
+  font-weight: 600 !important;
+  line-height: 1;
+  color: #fff;
+  text-align: left;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 50px;
+  position: absolute;
+}
+
+a.espace-ancre:hover {
+  color: #0f0 ;
+  text-decoration: underline;
+}
+
+.p-5.d-flex.align-items-start.prestateur {
+  background-color: var(--presta);
+}
+
+.p-5.d-flex.align-items-start.clients{
+  background-color: var(--presta);
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: var(--color) !important;
+  box-shadow: 3px 6px 10px 2px var(--bs-green);
+}
+
+.nav-pills .nav-link {
+  background: 0 0;
+  border: 0;
+  border-radius: .25rem;
+  color: var(--colorPrincipale)!important;
+  font-weight: 700;
+}
+
+div.race
+{
+  background-color: var(--color);
+  
+  margin-top: 5px;
+  border-radius: 4px;
+  border-color: var(--banniere) !important;
+  border: 2px solid;
+  max-width: 100px;
+  display:inline-block;
+}
+
+/* css pour tab*/
+
+ /* Style the tab */
+ .tablinks
+ {
+   color: var(--hover);
+   font-size: 25px;
+   
+ }
+
+ .tab
+ {
+   overflow: hidden;
+   border: 1px solid var(--hover);
+   background-color: var(--banniere);
+ }
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: var(--colorPrincipale);
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: var(--colorPrincipale)
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid var(--hover);
+  border-top: none;
+} 
+
+/*Fin*/

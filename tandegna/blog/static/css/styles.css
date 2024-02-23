@@ -1,0 +1,11 @@
+@import url("home.css");
+@import url("variables.css");
+@import url("blogLogin.css");
+@import url("contact.css");
+@import url("espace.css");
+body{
+    background-color: var(--bgcolor) !important;
+    color: var(--colorPrincipale) !important;
+    font-family: var(--font-family) !important;
+    
+}
